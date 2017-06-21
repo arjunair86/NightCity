@@ -10,21 +10,29 @@ function rand2 {
 	let "number2 %= $RANGE"
 }
 
-ticks=(█ ▓ ▒)
+ticks=(█ ▓ ▒ ║)
 
 declare -A matrix
+declare -A flag
 
 for((i=0;i<50;i++)) do
 	rand
 	matrix[$i]=$number
+	flag[$i]=0
 done
 
 for((i=0;i<6;i++)) do
 	for((j=0;j<50;j++)) do
 		if [[ ${matrix[$j]} == 0 ]]
 		then
-			rand2
-			echo -n ${ticks[$number2]}
+			if [[ ${flag[$j]} == 1 ]]
+			then
+				rand2
+				echo -n ${ticks[$number2]}
+			else
+				flag[$j]=1
+				echo -n ${ticks[3]}
+			fi
 		else
 			((matrix[$j]-=1))
 			echo -ne " "	
