@@ -11,6 +11,7 @@ function rand2 {
 }
 
 ticks=(█ ▓ ▒ ║)
+sky=("*" " " " " " " " " " ")
 
 declare -A matrix
 declare -A flag
@@ -38,7 +39,8 @@ do
 			fi
 		else
 			((matrix[$j]-=1))
-			echo -ne " "
+			rand
+			echo -ne "${sky[$number]}"
 		fi
 	done
 	echo -e "\r"
